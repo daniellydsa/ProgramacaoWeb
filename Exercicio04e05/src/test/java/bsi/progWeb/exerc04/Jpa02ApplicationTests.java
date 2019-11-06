@@ -1,10 +1,10 @@
-package bsi.progWeb.exec04;
+package bsi.progWeb.exerc04;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Exec04ApplicationTests {
+class Jpa02ApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>bsi.progWeb</groupId>
-	<artifactId>exec04</artifactId>
+	<artifactId>exerc04</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>exec04</name>
+	<name>Exercicio04</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
