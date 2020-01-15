@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "Reserva.findReservaByCliente",
         query = "SELECT r FROM Reserva r JOIN r.cliente c JOIN r.funcionario f JOIN r.quartos q WHERE c.id = :idC AND f.id = :idF AND q.id = :idQ")
 public class Reserva implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,10 +29,12 @@ public class Reserva implements Serializable {
     private Calendar   dataReserva;
     
     @ManyToOne
-    private Cliente cliente;
+    private Funcionario funcionario;
     
     @ManyToOne
-    private Funcionario funcionario;
+    private Cliente cliente;
+    
+   
     
     @ManyToMany
     private List<Quarto> quartos;
