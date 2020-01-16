@@ -32,4 +32,23 @@ public class FilesController {
             }
         }
     }
+    
+    @GetMapping("/pdf/{nome}")
+    public void getPdf(@PathVariable("nome") String nome,
+            HttpServletResponse response) {
+
+        String path = "/home/dd/Imagens/";
+        Path arquivo = Paths.get(path, nome);
+
+        if (Files.exists(arquivo)) {
+            response.setHeader("Content-Disposition", "inline");
+            response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+            try {
+                Files.copy(arquivo, response.getOutputStream());
+                response.getOutputStream().flush();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }

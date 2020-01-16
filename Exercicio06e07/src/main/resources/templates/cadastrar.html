@@ -21,12 +21,11 @@
                 <div class="panel-body">
                     <form class="form-inline" th:action="@{/clientes/cadastrar}" th:object="${cliente}" method="post" enctype="multipart/form-data" style="margin:20px 0">
                         <div class="form-group">
+                            <input type="hidden" th:field="*{id}"/>
                             <label for="#ids.next('nome')" th:text="'Nome:'"/>
                             <input class="form-control" type="text" th:field="*{nome}"/>
                             <label for="#ids.next('dtNasc')" th:text="'Data de Nascimento:'"/>
                             <input class="form-control" type="date" th:field="*{dtNasc}"/>
-                            <label for="file">Foto: </label>
-                            <input type="file" id="file" name="file" class="form-control"/>
                             <h3>Endereço:</h3>
                             <label for="#ids.next('endereco.rua')" th:text="'Rua:'"/>
                             <input class="form-control" type="text" th:field="*{endereco.rua}"/>
@@ -41,6 +40,11 @@
                                     </td>
                                 </tr>
                             </table>
+                            <br/>
+                            <label for="file">Foto: </label>
+                            <input type="file" id="file" name="file" class="form-control"/>
+                            <label for="pdf">Currículo: </label>
+                            <input type="file" id="pdf" name="pdf" class="form-control"/>
                             <br/>
                             <input class="btn btn-primary" type="submit" value="salvar"/>
                         </div>

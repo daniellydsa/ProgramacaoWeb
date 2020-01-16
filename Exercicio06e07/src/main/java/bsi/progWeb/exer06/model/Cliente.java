@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -22,8 +24,10 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Temporal(TemporalType.DATE)
     private Calendar dtNasc;
     private String foto;
+    private String curriculo;
     @Transient
     private String dataString;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,16 +36,26 @@ public class Cliente implements Serializable {
     private List<Telefone> telefones = new ArrayList<>();
 
     public String getDataString() {
-        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        this.dataString = sdf.format(dtNasc.getTime());
-        return dataString;
+        if (this.dtNasc != null) {
+            DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            this.dataString = sdf.format(dtNasc.getTime());
+            return dataString;
+        } else {
+            return "Data inválida ou nula";
+        }
     }
 
     public void setDataString(String dataString) {
         this.dataString = dataString;
     }
     
-    
+    public String getCurriculo() {
+        return curriculo;
+    }
+
+    public void setCurriculo(String curriculo) {
+        this.curriculo = curriculo;
+    }
     
     public Long getId() {
         return id;
