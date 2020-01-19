@@ -4,9 +4,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import org.apache.catalina.Manager;
 
 @Entity
 @NamedQuery(name = "Cliente.getQuantReservas", query = "SELECT COUNT(r) from Cliente c join c.reservas r where c.id = :id")

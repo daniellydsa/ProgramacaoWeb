@@ -50,7 +50,7 @@ public class ReservaController {
     public List<Reserva> getByCliente(@RequestParam("idCliente") Long idCliente, 
             @RequestParam("idFuncionario") Long idFuncionario,
             @RequestParam("idQuarto") Long idQuarto){
-        return repo.findAll();
+        return repo.findReservaByCliente(idCliente, idFuncionario, idQuarto);
     }
     
     @RequestMapping(path = "/datas", method = RequestMethod.GET)
