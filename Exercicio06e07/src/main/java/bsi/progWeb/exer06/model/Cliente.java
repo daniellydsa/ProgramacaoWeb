@@ -16,6 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Cliente implements Serializable {
@@ -23,15 +27,22 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String nome;
+    @Past
+    @NotNull(message = "Campo obrigatório")
     @Temporal(TemporalType.DATE)
     private Calendar dtNasc;
+    @NotNull(message = "Campo obrigatório")
     private String foto;
+    @NotNull(message = "Campo obrigatório")
     private String curriculo;
     @Transient
     private String dataString;
+    @NotNull(message = "Campo obrigatório")
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
+    @Size(min = 1, message = "Campo obrigatório")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones = new ArrayList<>();
 

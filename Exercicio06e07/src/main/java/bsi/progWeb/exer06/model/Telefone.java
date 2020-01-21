@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Telefone implements Serializable {
@@ -12,6 +14,8 @@ public class Telefone implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Digits(integer = 11, fraction = 0)
+    @NotNull(message = "Campo obrigatório")
     private String numero;
 
     public Long getId() {

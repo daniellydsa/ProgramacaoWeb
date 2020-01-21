@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="cliente : ${lista}">
-                                <td th:text="${cliente.id}"></td>
+                                <td hidden="true" th:text="${cliente.id}"></td>
                                 <td th:text="${cliente.nome}"></td>
                                 <td th:text="${cliente.dataString}"></td>
                                 <td><img th:src="${cliente.foto}" height="100" width="100"/></td>

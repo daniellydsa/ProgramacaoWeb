@@ -7,10 +7,12 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,8 +41,7 @@ public class ClienteController {
     }
     
     @GetMapping("/alterar/{id}")
-    public String putById(@PathVariable Long id, Model model, Cliente cliente) {
-        cliente.getTelefones().add(new Telefone());
+    public String putById(@PathVariable Long id, Model model) {
         model.addAttribute("cliente", repo.findById(id));
         return "cadastrar";
     }
@@ -52,13 +53,17 @@ public class ClienteController {
     }
 
     @PostMapping("/cadastrar")
-    public String save(@ModelAttribute Cliente cliente,
+    public String save(@Valid @ModelAttribute Cliente cliente, BindingResult bindingResult,
             @RequestParam("file") MultipartFile file, @RequestParam("pdf") MultipartFile pdf, Model model) {
 
-        if (file.isEmpty() && pdf.isEmpty()) {
+        if (bindingResult.hasErrors()) {
+            return "cadastrar";
+        }
+        
+        if (file.isEmpty() || pdf.isEmpty()) {
             model.addAttribute("msgFile", "Arquivo não carregado");
             return "cadastrar";
-        } else if (!file.getContentType().equals(MediaType.IMAGE_JPEG_VALUE) && !pdf.getContentType().equals(MediaType.APPLICATION_PDF_VALUE)) {
+        } else if (!file.getContentType().equals(MediaType.IMAGE_JPEG_VALUE) || !pdf.getContentType().equals(MediaType.APPLICATION_PDF_VALUE)) {
             model.addAttribute("msgFile", "Tipo de arquivo inválido");
             return "cadastrar";
         }
