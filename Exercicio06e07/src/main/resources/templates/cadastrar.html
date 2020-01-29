@@ -21,6 +21,9 @@
                 <div class="panel-body">
                     <form class="form-inline" th:action="@{/clientes/cadastrar}" th:object="${cliente}" method="post" enctype="multipart/form-data" style="margin:20px 0">
                         <div class="form-group">
+                            <ul th:if="${#fields.hasErrors('*')}">
+                                <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+                            </ul>
                             <input type="hidden" th:field="*{id}"/>
                             <label for="#ids.next('nome')" th:text="'Nome:'"/>
                             <input class="form-control" type="text" th:field="*{nome}"/>

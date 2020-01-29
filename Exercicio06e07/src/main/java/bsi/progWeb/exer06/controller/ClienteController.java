@@ -5,6 +5,7 @@ import bsi.progWeb.exer06.model.Telefone;
 import bsi.progWeb.exer06.repository.ClienteRepository;
 import java.nio.file.Paths;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.validation.Valid;
@@ -42,8 +43,13 @@ public class ClienteController {
     
     @GetMapping("/alterar/{id}")
     public String putById(@PathVariable Long id, Model model) {
-        model.addAttribute("cliente", repo.findById(id));
-        return "cadastrar";
+        Optional<Cliente> cli = repo.findById(id);
+        if (cli.isPresent()) {
+            model.addAttribute("cliente", repo.findById(id).get());
+            return "cadastrar";
+        } else {
+            return "redirect:../../clientes";
+        }
     }
     
     @GetMapping("/excluir/{id}")

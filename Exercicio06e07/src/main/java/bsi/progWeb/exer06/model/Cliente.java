@@ -33,16 +33,14 @@ public class Cliente implements Serializable {
     @NotNull(message = "Campo obrigatório")
     @Temporal(TemporalType.DATE)
     private Calendar dtNasc;
-    @NotNull(message = "Campo obrigatório")
     private String foto;
-    @NotNull(message = "Campo obrigatório")
     private String curriculo;
     @Transient
     private String dataString;
     @NotNull(message = "Campo obrigatório")
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
-    @Size(min = 1, message = "Campo obrigatório")
+    @NotNull(message = "Campo obrigatório")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones = new ArrayList<>();
 
